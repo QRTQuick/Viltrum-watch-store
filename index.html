@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Viltrum Luxury Horology | Powered by Quick Red Tech</title>
+    <meta name="description" content="Viltrum Luxury Watch Boutique. Discover prestigious timepieces from Rolex, Casio, Poedager, Rick, Arnahory, G-Shock, CK, Fossil, MK. Powered by Quick Red Tech." />
+    
+    <!-- PWA & Mobile Web App Meta -->
+    <meta name="theme-color" content="#07080A" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Viltrum" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Global Base Styles for React Native Web PWA -->
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+        background-color: #07080A;
+        color: #F3F4F6;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Custom luxury scrollbars */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0D1017;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2A3245;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #C9A24D;
+      }
+
+      /* Luxury animations & keyframes */
+      @keyframes goldShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      @keyframes floatSlow {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-8px) rotate(1deg); }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+      @keyframes spinSlow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes radarSweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .luxury-gold-gradient {
+        background: linear-gradient(135deg, #FFF3B0 0%, #E5B94E 40%, #C9A24D 70%, #9C7726 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .quick-red-gradient {
+        background: linear-gradient(135deg, #FF6B6B 0%, #E61E2A 50%, #A60D17 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .glass-panel {
+        background: rgba(18, 24, 38, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(201, 162, 77, 0.18);
+      }
+      .glass-card {
+        background: linear-gradient(145deg, rgba(22, 28, 44, 0.8) 0%, rgba(13, 17, 27, 0.9) 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .glass-card:hover {
+        border-color: rgba(201, 162, 77, 0.4);
+        box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(201, 162, 77, 0.2);
+        transform: translateY(-4px);
+      }
+      /* Responsive navbar & layout */
+      @media (max-width: 1024px) {
+        div[style*="desktopNavLinks"] {
+          display: none !important;
+        }
+        div[style*="mobileMenuButton"] {
+          display: flex !important;
+        }
+      }
+      @media (min-width: 1025px) {
+        div[style*="mobileMenuButton"] {
+          display: none !important;
+        }
+      }
+
+      /* Responsive watch card grid */
+      @media (max-width: 1200px) and (min-width: 860px) {
+        div[style*="watchCardCol"] {
+          max-width: 33.333% !important;
+          flex: 1 0 30% !important;
+        }
+      }
+      @media (max-width: 859px) and (min-width: 540px) {
+        div[style*="watchCardCol"] {
+          max-width: 50% !important;
+          flex: 1 0 45% !important;
+        }
+      }
+      @media (max-width: 539px) {
+        div[style*="watchCardCol"] {
+          max-width: 100% !important;
+          flex: 1 0 100% !important;
+        }
+        div[style*="mobileBottomDock"] {
+          display: flex !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Register Service Worker for PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('Viltrum PWA Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('Viltrum PWA Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
